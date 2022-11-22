@@ -37,3 +37,7 @@ public class Permission implements Serializable {
         this.method = method;
     }
 }
+/**
+ * All getter and setter
+ * @return
+ */

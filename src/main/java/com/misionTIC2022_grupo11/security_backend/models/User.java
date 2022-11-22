@@ -46,3 +46,7 @@ public class User implements Serializable {
         this.password = password;
     }
 }
+/**
+ * All getter and setter
+ * @return
+ */

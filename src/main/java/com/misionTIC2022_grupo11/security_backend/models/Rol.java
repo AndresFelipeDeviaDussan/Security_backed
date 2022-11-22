@@ -36,4 +36,8 @@ public class Rol implements Serializable {
         this.description = description;
     }
 }
+/**
+ * All getter and setter
+ * @return
+ */
 
