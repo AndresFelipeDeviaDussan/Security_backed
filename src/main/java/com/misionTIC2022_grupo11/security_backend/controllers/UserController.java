@@ -22,14 +22,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable("id") int id){
-
         return this.userService.show(id);
     }
 
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
     public User insertUser(@RequestBody User user){
-
         return this.userService.create(user);
     }
 

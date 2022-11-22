@@ -18,34 +18,29 @@ public class RolController {
 
     @GetMapping("/all")
     public List<Rol> getAllRolls(){
-
         return this.rolService.index();
     }
 
     @GetMapping("/{id}")
     public Optional<Rol> getRolById(@PathVariable("id") int id){
-
         return this.rolService.show(id);
     }
 
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
     public Rol insertRol(@RequestBody Rol rol){
-
         return this.rolService.create(rol);
     }
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Rol updateRol(@PathVariable("id") int id,@RequestBody Rol rol){
-
         return this.rolService.update(id, rol);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean deleteRol(@PathVariable("id") int id){
-
         return this.rolService.delete(id);
     }
 }
