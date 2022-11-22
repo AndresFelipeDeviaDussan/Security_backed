@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class UserService {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository;  // If it starts with lowercase it is the object variable
 
     /**
      * Using the list call all the BD of User
@@ -80,13 +80,13 @@ public class UserService {
     }
 
 }
-
     /**
-     * In this command use a Boolean to perform a mapping in the BD for search and validate specific information to user
+     * In this command use a Boolean to perform a mapping in the BD for search and validate specific information to User
      * for delete this
      * @param id you need this param for search in the mapping
      * @return The information delete
      */
+
     public boolean delete(int id){
         Boolean success = this.show(id).map(user -> {
             this.userRepository.delete(user);
@@ -95,4 +95,6 @@ public class UserService {
         return success;
 
     }
+
+
 }

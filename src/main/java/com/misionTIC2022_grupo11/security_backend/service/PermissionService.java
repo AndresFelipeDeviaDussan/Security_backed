@@ -12,15 +12,32 @@ import java.util.Optional;
 public class PermissionService {
     @Autowired
     private PermissionRepository permissionRepository;
+
+    /**
+     * Using the list call all the BD of Permission
+     * @return BD of Permissions
+     */
     public List<Permission> index(){
         return (List<Permission>)this.permissionRepository.findAll();
 
     }
 
+    /**
+     * Using the list call specific information of BD
+     * @param id you need this param for call the information
+     * @return specific information of a one Permission
+     */
+
     public Optional<Permission> show(int id){
         return this.permissionRepository.findById(id);
 
     }
+
+    /**
+     * In this command you can create new User id with mandatory information
+     * @param newPermission here we establish the mandatory information, it is where we will store it
+     * @return new information to the BD
+     */
 
     public Permission create(Permission newPermission) {
         if (newPermission.getId() == null) {
@@ -36,6 +53,13 @@ public class PermissionService {
             return newPermission;
         }
     }
+
+    /**
+     * In this command you can update/change specific information of Rol in the BD
+     * @param id you need this param for search the information
+     * @param updatePermission in this parameter we save the information and validate that said content can be updated
+     * @return update information of specific Permission
+     */
 
     public Permission update(int id, Permission updatePermission){
         if (id > 0){
@@ -58,6 +82,13 @@ public class PermissionService {
         }
     }
 
+    /**
+     * In this command use a Boolean to perform a mapping in the BD for search and validate specific information to Rol
+     * for delete this
+     * @param id you need this param for search in the mapping
+     * @return The information delete
+     */
+
     public boolean delete(int id){
         Boolean success = this.show(id).map(permission -> {
             this.permissionRepository.delete(permission);
@@ -67,3 +98,4 @@ public class PermissionService {
 
     }
 }
+
