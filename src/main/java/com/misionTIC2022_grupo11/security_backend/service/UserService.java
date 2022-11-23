@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +101,24 @@ public class UserService {
 
     }
 
+    public HashMap<String, Boolean> login(User user){
+        HashMap<String, Boolean> response = new HashMap<>();
+        if (user.getPassword() != null && user.getEmail() != null) {
+            String email = user.getEmail();
+            String password = this.convertToSHA256(user.getPassword());
+            Optional<User> result = this.userRepository.login(email, password);
+            if (result.isEmpty())
+                response.put("access", false);
+            else {
+                response.put("access", true);
+            }
+        }
+        else {
+            response.put("access", false);
+        }
+        return response;
+    }
+
     /**
      * Classical encryption algorithm
      * @param password
@@ -108,15 +127,15 @@ public class UserService {
     public String convertToSHA256(String password){
         MessageDigest md = null;
         try{
-            md = MessageDigest.getInstance("SHA256");
+            md = MessageDigest.getInstance("SHA-256");
         }
-        catch (NoSuchAlgorithmException e){
+        catch(NoSuchAlgorithmException e){
             e.printStackTrace();
             return null;
         }
         byte[] hash = md.digest(password.getBytes());
         StringBuffer sb = new StringBuffer();
-        for(byte b:hash)
+        for(byte b: hash)
             sb.append( String.format("%02x", b));
         return sb.toString();
     }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User insertUser(@RequestBody User user){
         return this.userService.create(user);
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public HashMap<String, Boolean> loginUser(@RequestBody User user){
+        return  this.userService.login(user);
     }
 
     @PutMapping("/update/{id}")

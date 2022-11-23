@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+    //TODO adjust fields constraints
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
