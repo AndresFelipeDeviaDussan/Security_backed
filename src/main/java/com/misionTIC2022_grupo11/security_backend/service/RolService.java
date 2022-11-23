@@ -38,7 +38,7 @@ public class RolService {
      * @return new information to the BD
      */
     public Rol create(Rol newRol){
-        if (newRol.getId() == null) {
+        if (newRol.getIdRol() == null) {
             if (newRol.getName() != null)
                 return this.rolRepository.save(newRol);
             else {

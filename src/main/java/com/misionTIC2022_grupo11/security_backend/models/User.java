@@ -8,12 +8,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-    //TODO adjust fields constraints
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
+    @Column(name = "nick_name",nullable = false, unique = true)
     private String nick_name;
+    @Column(name = "email",nullable = false,unique = true)
     private String email;
+    @Column(name = "password",nullable = false)
     private String password;
 
 
@@ -24,10 +26,6 @@ public class User implements Serializable {
 
     public Integer getId() {
         return idUser;
-    }
-
-    public void setId(Integer id) {
-        this.idUser = id;
     }
 
     public String getNick_name() {

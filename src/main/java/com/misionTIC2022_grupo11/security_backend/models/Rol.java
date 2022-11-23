@@ -12,6 +12,7 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRol;
+    @Column(name = "name", nullable = false, unique = true) //lengh distance of the name create
     private String name;
     private String description;
 
@@ -29,11 +30,11 @@ public class Rol implements Serializable {
     )
     private Set<Permission> permissions;  // set = conjuntos
 
-    public Integer getId() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setId(Integer id) {
+    public void setIdRol(Integer id) {
         this.idRol = id;
     }
 
