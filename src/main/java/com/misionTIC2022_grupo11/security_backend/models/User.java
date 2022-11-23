@@ -1,5 +1,7 @@
 package com.misionTIC2022_grupo11.security_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,18 +10,23 @@ import java.io.Serializable;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUser;
     private String nick_name;
     private String email;
     private String password;
 
 
+    @ManyToOne
+    @JoinColumn(name = "idRol") // Mentions to the program where the relationship exists
+    @JsonIgnoreProperties("users")   // Explanation of the command in "User"
+    private Rol rol;
+
     public Integer getId() {
-        return id;
+        return idUser;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idUser = id;
     }
 
     public String getNick_name() {
@@ -44,6 +51,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }
 /**
