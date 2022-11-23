@@ -5,6 +5,8 @@ import com.misionTIC2022_grupo11.security_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +42,10 @@ public class UserService {
      */
     public User create(User newUser) {
         if (newUser.getId() == null) {
-            if (newUser.getEmail() != null && newUser.getNick_name() != null && newUser.getPassword() != null)
+            if (newUser.getEmail() != null && newUser.getNick_name() != null && newUser.getPassword() != null){
+                newUser.setPassword(this.convertToSHA256(newUser.getPassword()));
                 return this.userRepository.save(newUser);
+            }
             else {
                 //TODO 400 BabRequest
                 return newUser;
@@ -67,7 +71,7 @@ public class UserService {
                 if (updateUser.getNick_name() != null)
                     temUser.get().setNick_name(updateUser.getNick_name());
                 if (updateUser.getPassword() != null)
-                    temUser.get().setPassword(updateUser.getPassword());
+                    temUser.get().setPassword(this.convertToSHA256(updateUser.getPassword()));
                 return this.userRepository.save(temUser.get());
             } else {
                 //TODO 400 NotFound
@@ -96,5 +100,24 @@ public class UserService {
 
     }
 
-
+    /**
+     * Classical encryption algorithm
+     * @param password
+     * @return
+     */
+    public String convertToSHA256(String password){
+        MessageDigest md = null;
+        try{
+            md = MessageDigest.getInstance("SHA256");
+        }
+        catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+            return null;
+        }
+        byte[] hash = md.digest(password.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for(byte b:hash)
+            sb.append( String.format("%02x", b));
+        return sb.toString();
+    }
 }
