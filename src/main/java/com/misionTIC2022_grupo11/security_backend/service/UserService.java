@@ -4,6 +4,7 @@ import com.misionTIC2022_grupo11.security_backend.models.User;
 import com.misionTIC2022_grupo11.security_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -121,7 +122,7 @@ public class UserService {
 
     }
 
-    public User login(User user){
+    public ResponseEntity<User> login(User user){
         User response;
         if (user.getPassword() != null && user.getEmail() != null) {
             String email = user.getEmail();
@@ -138,7 +139,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Mandatory fields had not been sent. ");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**

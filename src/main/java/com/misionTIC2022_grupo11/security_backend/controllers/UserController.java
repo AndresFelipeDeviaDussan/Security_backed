@@ -4,6 +4,7 @@ import com.misionTIC2022_grupo11.security_backend.models.User;
 import com.misionTIC2022_grupo11.security_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User loginUser(@RequestBody User user){
+    public ResponseEntity<User> loginUser(@RequestBody User user){
         return  this.userService.login(user);
     }
 
