@@ -1,5 +1,7 @@
 package com.misionTIC2022_grupo11.security_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class Permission implements Serializable {
     private String method;
 
     @ManyToMany(mappedBy = "permissions")
+    @JsonIgnoreProperties("permissions")
     private Set<Rol> rols; // set = conjuntos
 
     public Integer getId() {
